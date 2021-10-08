@@ -1,4 +1,8 @@
 ---
-docker_compose_generator_output_path: "~"
-docker_compose_generator_uid: "1000"
-docker_compose_generator_gid: "1000"
+docker_compose_user: root
+docker_compose_yaml: CHANGEME  # docker-compose in yaml
+docker_compose_path: "~"
+docker_compose_file: "{{docker_compose_path}}/docker-compose.yml"
+docker_compose_mode: 0644
+docker_compose_owner: "{{ docker_compose_user }}"
+docker_compose_group: "{{ docker_compose_user }}"

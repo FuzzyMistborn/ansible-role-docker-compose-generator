@@ -1,12 +1,15 @@
 ---
 - name: ensure destination for compose file exists
   file:
-    path: "{{ docker_compose_generator_output_path }}"
+    path: "{{ docker_compose_path }}"
     state: directory
 
-- name: write docker-compose file
-  template:
-    src: ../templates/docker-compose.yml.j2
-    dest: "{{ docker_compose_generator_output_path }}/docker-compose.yml"
-    owner: "{{ docker_compose_generator_uid }}"
-    group: "{{ docker_compose_generator_gid }}"
+- name: Copy docker-compose file
+  copy:
+    content: "{{ docker_compose_yaml }}"
+    dest: "{{ docker_compose_file }}"
+    owner: "{{ docker_compose_owner }}"
+    group: "{{ docker_compose_group }}"
+    mode: "{{ docker_compose_mode }}"
+  when: docker_compose_yaml != "CHANGEME"
+  register: config_update
